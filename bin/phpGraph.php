@@ -1599,6 +1599,9 @@ class phpGraph
 				$legends = [0 => $legends];
 			}
 			foreach ($legends as $key => $value) {
+				if (!\is_numeric($key)) {
+					throw new InvalidArgumentException("into legends the key \"{$key}\" is not a numeric value");
+				}
 				if (isset($type[ $key ]) && $type[ $key ] != self::TYPE_PIE && $type[ $key ] != self::TYPE_RING) {
 					if (is_array($stroke) && isset($stroke[ $key ])) {
 						$leg .= "\n\t\t" . '<rect x="50" y="' . ($HEIGHT + 30 + $key * (2 * $paddingTop) + $marginTop) . '" width="10" height="10" fill="' . $stroke[ $key ] . '" class="graph-legend-stroke"/>';
